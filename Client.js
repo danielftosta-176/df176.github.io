@@ -35,6 +35,7 @@ function Client(uri) {
 	this.noteBuffer = [];
 	this.noteBufferTime = 0;
 	this.noteFlushInterval = undefined;
+	this['ðŸˆ'] = 0;
 
 	this.bindEventListeners();
 
@@ -67,14 +68,23 @@ Client.prototype.stop = function() {
 	this.ws.close();
 };
 
-Client.prototype.connect = function() {
+Client.prototype.connect = function(log) {
 	if(!this.canConnect || !this.isSupported() || this.isConnected() || this.isConnecting())
 		return;
 	this.emit("status", "Connecting...");
-	this.ws = new WebSocket(this.uri);
-	this.ws.binaryType = "arraybuffer";
+	console.log(`Connect to ${this.uri}`)
+	if(typeof module !== "undefined") {
+		// nodejsicle
+		this.ws = new WebSocket(this.uri, {
+			origin: "https://app.multiplayerpiano.com"
+		});
+	} else {
+		// browseroni
+		this.ws = new WebSocket(this.uri);
+	}
 	var self = this;
 	this.ws.addEventListener("close", function(evt) {
+		log && console.log(`close`, evt)
 		self.user = undefined;
 		self.participantId = undefined;
 		self.channel = undefined;
@@ -82,7 +92,7 @@ Client.prototype.connect = function() {
 		clearInterval(self.pingInterval);
 		clearInterval(self.noteFlushInterval);
 
-		self.emit("disconnect");
+		self.emit("disconnect", evt);
 		self.emit("status", "Offline mode");
 
 		// reconnect!
@@ -98,9 +108,15 @@ Client.prototype.connect = function() {
 		var ms = ms_lut[idx];
 		setTimeout(self.connect.bind(self), ms);
 	});
+	this.ws.addEventListener("error", function(err) {
+		log && console.log(`ws error`, err)
+		self.emit("wserror", err);
+		self.ws.close(); // self.ws.emit("close");
+	});
 	this.ws.addEventListener("open", function(evt) {
+		log && console.log(`ws open`)
 		self.connectionTime = Date.now();
-		self.sendArray([{m: "hi"}]);
+		self.sendArray([{"m": "hi", "ðŸˆ": self['ðŸˆ']++ || undefined }]);
 		self.pingInterval = setInterval(function() {
 			self.sendArray([{m: "t", e: Date.now()}]);
 		}, 20000);
@@ -119,8 +135,8 @@ Client.prototype.connect = function() {
 		self.emit("status", "Joining channel...");
 	});
 	this.ws.addEventListener("message", function(evt) {
-		if(typeof evt.data !== 'string') return;
 		var transmission = JSON.parse(evt.data);
+		log && console.log(`message`, transmission)
 		for(var i = 0; i < transmission.length; i++) {
 			var msg = transmission[i];
 			self.emit(msg.m, msg);
@@ -142,6 +158,7 @@ Client.prototype.bindEventListeners = function() {
 	});
 	this.on("ch", function(msg) {
 		self.desiredChannelId = msg.ch._id;
+		self.desiredChannelSettings = msg.ch.settings;
 		self.channel = msg.ch;
 		if(msg.p) self.participantId = msg.p;
 		self.setParticipants(msg.ppl);
@@ -175,10 +192,6 @@ Client.prototype.setChannel = function(id, set) {
 };
 
 Client.prototype.offlineChannelSettings = {
-	lobby: true,
-	visible: false,
-	chat: false,
-	crownsolo: false,
 	color:"#ecfaed"
 };
 
@@ -189,7 +202,20 @@ Client.prototype.getChannelSetting = function(key) {
 	return this.channel.settings[key];
 };
 
+Client.prototype.setChannelSettings = function(settings) {
+	if(!this.isConnected() || !this.channel || !this.channel.settings) {
+		return;
+	} 
+	if(this.desiredChannelSettings){
+		for(var key in settings) {
+			this.desiredChannelSettings[key] = settings[key];
+		}
+		this.sendArray([{m: "chset", set: this.desiredChannelSettings}]);
+	}
+};
+
 Client.prototype.offlineParticipant = {
+	_id: "",
 	name: "",
 	color: "#777"
 };
