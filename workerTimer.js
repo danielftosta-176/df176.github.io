@@ -1,1 +1,0 @@
-self.onmessage=function(a){setTimeout(function(){postMessage({args:a.data.args})},a.data.delay)};
