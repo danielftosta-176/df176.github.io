@@ -35,7 +35,7 @@ function Client(uri) {
 	this.noteBuffer = [];
 	this.noteBufferTime = 0;
 	this.noteFlushInterval = undefined;
-	this['ðŸˆ'] = 0;
+	this['🐈'] = 0;
 
 	this.bindEventListeners();
 
@@ -68,15 +68,14 @@ Client.prototype.stop = function() {
 	this.ws.close();
 };
 
-Client.prototype.connect = function(log) {
+Client.prototype.connect = function() {
 	if(!this.canConnect || !this.isSupported() || this.isConnected() || this.isConnecting())
 		return;
 	this.emit("status", "Connecting...");
-	console.log(`Connect to ${this.uri}`)
 	if(typeof module !== "undefined") {
 		// nodejsicle
 		this.ws = new WebSocket(this.uri, {
-			origin: "https://app.multiplayerpiano.com"
+			origin: "https://www.multiplayerpiano.com"
 		});
 	} else {
 		// browseroni
@@ -84,7 +83,6 @@ Client.prototype.connect = function(log) {
 	}
 	var self = this;
 	this.ws.addEventListener("close", function(evt) {
-		log && console.log(`close`, evt)
 		self.user = undefined;
 		self.participantId = undefined;
 		self.channel = undefined;
@@ -109,14 +107,12 @@ Client.prototype.connect = function(log) {
 		setTimeout(self.connect.bind(self), ms);
 	});
 	this.ws.addEventListener("error", function(err) {
-		log && console.log(`ws error`, err)
 		self.emit("wserror", err);
 		self.ws.close(); // self.ws.emit("close");
 	});
 	this.ws.addEventListener("open", function(evt) {
-		log && console.log(`ws open`)
 		self.connectionTime = Date.now();
-		self.sendArray([{"m": "hi", "ðŸˆ": self['ðŸˆ']++ || undefined }]);
+		self.sendArray([{"m": "hi", "🐈": self['🐈']++ || undefined }]);
 		self.pingInterval = setInterval(function() {
 			self.sendArray([{m: "t", e: Date.now()}]);
 		}, 20000);
@@ -136,7 +132,6 @@ Client.prototype.connect = function(log) {
 	});
 	this.ws.addEventListener("message", function(evt) {
 		var transmission = JSON.parse(evt.data);
-		log && console.log(`message`, transmission)
 		for(var i = 0; i < transmission.length; i++) {
 			var msg = transmission[i];
 			self.emit(msg.m, msg);
