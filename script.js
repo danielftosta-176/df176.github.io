@@ -1,10 +1,15 @@
+
+// é’¢ç´
+
 $(function() {
 
 	var test_mode = (window.location.hash && window.location.hash.match(/^(?:#.+)*#test(?:#.+)*$/i));
 
 	var gSeeOwnCursor = (window.location.hash && window.location.hash.match(/^(?:#.+)*#seeowncursor(?:#.+)*$/i));
 
-	var gMidiOutTest = (window.location.hash && window.location.hash.match(/^(?:#.+)*#midiout(?:#.+)*$/i)); // todo this is no longer needed
+	var gMidiVolumeTest = (window.location.hash && window.location.hash.match(/^(?:#.+)*#midivolumetest(?:#.+)*$/i));
+
+	var gMidiOutTest;
 
 	if (!Array.prototype.indexOf) {
 		Array.prototype.indexOf = function(elt /*, from*/) {
@@ -28,47 +33,8 @@ $(function() {
 
 
 
-/*
-	var gSoundPath = "mp3/";
-	var gSoundExt = ".wav.mp3";
-	
-	// Yoshify.
-	if ((window.location.hash && window.location.hash.match(/^(?:#.+)*#Piano_Great_and_Soft(?:#.+)*$/i))) {		
-		gSoundPath = "https://dl.dropboxusercontent.com/u/216104606/GreatAndSoftPiano/";		
-		gSoundExt = ".mp3";		
-	}
 
-	if ((window.location.hash && window.location.hash.match(/^(?:#.+)*#Piano_Loud_and_Proud(?:#.+)*$/i))) {		
-		gSoundPath = "https://dl.dropboxusercontent.com/u/216104606/LoudAndProudPiano/";		
-		gSoundExt = ".mp3";		
-	}
 
-	// electrashave
-	if((window.location.hash && window.location.hash.match(/^(?:#.+)*#NewPiano(?:#.+)*$/i))) {
-		gSoundPath = "https://dl.dropboxusercontent.com/u/258840068/CustomSounds/NewPiano/";
-		gSoundExt = ".mp3";
-	}
-
-	// Ethan Walsh
-	if((window.location.hash && window.location.hash.match(/^(?:#.+)*#HDPiano(?:#.+)*$/i))) {
-		gSoundPath = "https://dl.dropboxusercontent.com/u/258840068/CustomSounds/HDPiano/";
-		gSoundExt = ".wav";
-	}
-	if((window.location.hash && window.location.hash.match(/^(?:#.+)*#Harpischord(?:#.+)*$/i))) {
-		gSoundPath = "https://dl.dropboxusercontent.com/u/24213061/Harpischord/";
-		gSoundExt = ".wav";
-	}
-	if((window.location.hash && window.location.hash.match(/^(?:#.+)*#ClearPiano(?:#.+)*$/i))) {
-		gSoundPath = "https://dl.dropboxusercontent.com/u/24213061/ClearPiano/";
-		gSoundExt = ".wav";
-	}
-
-	// Alexander Holmfjeld
-	if((window.location.hash && window.location.hash.match(/^(?:#.+)*#Klaver(?:#.+)*$/i))) {
-		gSoundPath = "https://dl.dropboxusercontent.com/u/70730519/Klaver/";
-		gSoundExt = ".wav";
-	}
-*/
 	
 
 
@@ -203,73 +169,73 @@ Rect.prototype.contains = function(x, y) {
 	var Translation = (function() {
 		var strings = {
 			"people are playing": {
-				"pt": "pessoas estão jogando",
-				"es": "personas están jugando",
-				"ru": "человек играет",
+				"pt": "pessoas estÃ£o jogando",
+				"es": "personas estÃ¡n jugando",
+				"ru": "Ñ‡ÐµÐ»Ð¾Ð²ÐµÐº Ð¸Ð³Ñ€Ð°ÐµÑ‚",
 				"fr": "personnes jouent",
-				"ja": "人が遊んでいる",
+				"ja": "äººãŒéŠã‚“ã§ã„ã‚‹",
 				"de": "Leute spielen",
-				"zh": "人被打",
+				"zh": "äººåœ¨çŽ©",
 				"nl": "mensen spelen",
-				"pl": "osób grają",
-				"hu": "ember játszik"
+				"pl": "osÃ³b grajÄ…",
+				"hu": "ember jÃ¡tszik"
 			},
 			"New Room...": {
 				"pt": "Nova Sala ...",
 				"es": "Nueva sala de...",
-				"ru": "Новый номер...",
-				"ja": "新しい部屋",
-				"zh": "新房间",
+				"ru": "ÐÐ¾Ð²Ñ‹Ð¹ Ð½Ð¾Ð¼ÐµÑ€...",
+				"ja": "æ–°ã—ã„éƒ¨å±‹",
+				"zh": "æ–°æˆ¿é—´",
 				"nl": "nieuwe Kamer",
-				"hu": "új szoba"
+				"hu": "Ãºj szoba"
 			},
 			"room name": {
 				"pt": "nome da sala",
 				"es": "sala de nombre",
-				"ru": "название комнаты",
+				"ru": "Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñ‹",
 				"fr": "nom de la chambre",
-				"ja": "ルーム名",
+				"ja": "ãƒ«ãƒ¼ãƒ å",
 				"de": "Raumnamen",
-				"zh": "房间名称",
+				"zh": "æˆ¿é—´åç§°",
 				"nl": "kamernaam",
-				"pl": "nazwa pokój",
+				"pl": "nazwa pokÃ³j",
 				"hu": "szoba neve"
 			},
 			"Visible (open to everyone)": {
-				"pt": "Visível (aberto a todos)",
+				"pt": "VisÃ­vel (aberto a todos)",
 				"es": "Visible (abierto a todo el mundo)",
-				"ru": "Visible (открытый для всех)",
-				"fr": "Visible (ouvert à tous)",
-				"ja": "目に見える（誰にでも開いている）",
-				"de": "Sichtbar (offen für alle)",
-				"zh": "可见（向所有人开放）",
+				"ru": "Visible (Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚Ñ‹Ð¹ Ð´Ð»Ñ Ð²ÑÐµÑ…)",
+				"fr": "Visible (ouvert Ã  tous)",
+				"ja": "ç›®ã«è¦‹ãˆã‚‹ï¼ˆèª°ã«ã§ã‚‚é–‹ã„ã¦ã„ã‚‹ï¼‰",
+				"de": "Sichtbar (offen fÃ¼r alle)",
+				"zh": "å¯è§ï¼ˆå‘æ‰€æœ‰äººå¼€æ”¾ï¼‰",
 				"nl": "Zichtbaar (open voor iedereen)",
 				"pl": "Widoczne (otwarte dla wszystkich)",
-				"hu": "Látható (nyitott mindenki számára)"
+				"hu": "LÃ¡thatÃ³ (nyitott mindenki szÃ¡mÃ¡ra)"
 			},
 			"Enable Chat": {
 				"pt": "Ativar bate-papo",
 				"es": "Habilitar chat",
-				"ru": "Включить чат",
+				"ru": "Ð’ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ Ñ‡Ð°Ñ‚",
 				"fr": "Activer discuter",
-				"ja": "チャットを有効にする",
+				"ja": "ãƒãƒ£ãƒƒãƒˆã‚’æœ‰åŠ¹ã«ã™ã‚‹",
 				"de": "aktivieren Sie chatten",
-				"zh": "启用聊天",
+				"zh": "å¯ç”¨èŠå¤©",
 				"nl": "Chat inschakelen",
-				"pl": "Włącz czat",
-				"hu": "a csevegést"
+				"pl": "WÅ‚Ä…cz czat",
+				"hu": "a csevegÃ©st"
 			},
 			"Play Alone": {
 				"pt": "Jogar Sozinho",
 				"es": "Jugar Solo",
-				"ru": "Играть в одиночку",
+				"ru": "Ð˜Ð³Ñ€Ð°Ñ‚ÑŒ Ð² Ð¾Ð´Ð¸Ð½Ð¾Ñ‡ÐºÑƒ",
 				"fr": "Jouez Seul",
-				"ja": "一人でプレイ",
+				"ja": "ä¸€äººã§ãƒ—ãƒ¬ã‚¤",
 				"de": "Alleine Spielen",
-				"zh": "独自玩耍",
+				"zh": "ç‹¬è‡ªçŽ©è€",
 				"nl": "Speel Alleen",
 				"pl": "Zagraj sam",
-				"hu": "Játssz egyedül"
+				"hu": "JÃ¡tssz egyedÃ¼l"
 			}
 			// todo: it, tr, th, sv, ar, fi, nb, da, sv, he, cs, ko, ro, vi, id, nb, el, sk, bg, lt, sl, hr
 			// todo: Connecting, Offline mode, input placeholder, Notifications
@@ -346,6 +312,7 @@ Rect.prototype.contains = function(x, y) {
 	AudioEngine.prototype.init = function(cb) {
 		this.volume = 0.6;
 		this.sounds = {};
+		this.paused = true;
 		return this;
 	};
 
@@ -361,11 +328,15 @@ Rect.prototype.contains = function(x, y) {
 	AudioEngine.prototype.setVolume = function(vol) {
 		this.volume = vol;
 	};
+	
+	AudioEngine.prototype.resume = function() {
+		this.paused = false;
+	};
 
 
 	AudioEngineWeb = function() {
-		this.threshold = 10;
-		this.worker = new Worker("workerTimer.js"); //must be same origin
+		this.threshold = 1000;
+		this.worker = new Worker("/workerTimer.js");
 		var self = this;
 		this.worker.onmessage = function(event)
 			{
@@ -386,7 +357,7 @@ Rect.prototype.contains = function(x, y) {
 	AudioEngineWeb.prototype.init = function(cb) {
 		AudioEngine.prototype.init.call(this);
 
-		this.context = new AudioContext();
+		this.context = new AudioContext({latencyHint: 'interactive'});
 
 		this.masterGain = this.context.createGain();
 		this.masterGain.connect(this.context.destination);
@@ -441,6 +412,7 @@ Rect.prototype.contains = function(x, y) {
 	};
 
 	AudioEngineWeb.prototype.actualPlay = function(id, vol, time, part_id) { //the old play(), but with time insted of delay_ms.
+		if(this.paused) return;
 		if(!this.sounds.hasOwnProperty(id)) return;
 		var source = this.context.createBufferSource();
 		source.buffer = this.sounds[id];
@@ -453,8 +425,8 @@ Rect.prototype.contains = function(x, y) {
 		if(this.playings[id]) {
 			var playing = this.playings[id];
 			playing.gain.gain.setValueAtTime(playing.gain.gain.value, time);
-			playing.gain.gain.linearRampToValueAtTime(0.0, time + gPiano.audio.lramp);
-			playing.source.stop(time + gPiano.audio.sstop);
+			playing.gain.gain.linearRampToValueAtTime(0.0, time + 0.2);
+			playing.source.stop(time + 0.21);
 			if(enableSynth && playing.voice) {
 				playing.voice.stop(time);
 			}
@@ -481,9 +453,9 @@ Rect.prototype.contains = function(x, y) {
 		if(this.playings.hasOwnProperty(id) && this.playings[id] && this.playings[id].part_id === part_id) {
 			var gain = this.playings[id].gain.gain;
 			gain.setValueAtTime(gain.value, time);
-			gain.linearRampToValueAtTime(gain.value * 0.1, time + gPiano.audio.lramps);
-			gain.linearRampToValueAtTime(0.0, time + gPiano.audio.lramps2);
-			this.playings[id].source.stop(time + gPiano.audio.sstops);
+			gain.linearRampToValueAtTime(gain.value * 0.1, time + 0.16);
+			gain.linearRampToValueAtTime(0.0, time + 0.4);
+			this.playings[id].source.stop(time + 0.41);
 			
 
 			if(this.playings[id].voice) {
@@ -507,57 +479,18 @@ Rect.prototype.contains = function(x, y) {
 		AudioEngine.prototype.setVolume.call(this, vol);
 		this.masterGain.gain.value = this.volume;
 	};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// VolumeSlider inst
-
-////////////////////////////////////////////////////////////////
-
-	var VolumeSlider = function(ele, cb) {
-		this.rootElement = ele;
-		this.cb = cb;
-		var range = document.createElement("input");
-		try {
-			range.type = "range";
-		} catch(e) {
-			// hello, IE9
-		}
-		if(range.min !== undefined) {
-			this.range = range;
-			this.rootElement.appendChild(range);
-			range.className = "volume-slider";
-			range.min = "0.0";
-			range.max = "1.0";
-			range.step = "0.01";
-			$(range).on("change", function(evt) {
-				cb(range.value);
-			});
-		} else {
-			if(window.console) console.log("warn: no slider");
-			// todo
-		}
+	
+	AudioEngineWeb.prototype.resume = function() {
+		this.paused = false;
+		this.context.resume();
 	};
 
-	VolumeSlider.prototype.set = function(v) {
-		if(this.range !== undefined) {
-			this.range.value = v;
-		} else {
-			// todo
-		}
-	};
+
+
+
+
+
+
 
 
 
@@ -594,98 +527,11 @@ Rect.prototype.contains = function(x, y) {
 		if(typeof width == "undefined") width = $(this.piano.rootElement).width();
 		if(typeof height == "undefined") height = Math.floor(width * 0.2);
 		$(this.piano.rootElement).css({"height": height + "px", marginTop: Math.floor($(window).height() / 2 - height / 2) + "px"});
-		this.width = width * devicePixelRatio;
-		this.height = height * devicePixelRatio;
+		this.width = width * window.devicePixelRatio;
+		this.height = height * window.devicePixelRatio;
 	};
 
 	Renderer.prototype.visualize = function(key, color) {
-	};
-
-
-
-
-	var DOMRenderer = function() {
-		Renderer.call(this);
-	};
-
-	DOMRenderer.prototype = new Renderer();
-
-	DOMRenderer.prototype.init = function(piano) {
-		// create keys in dom
-		for(var i in piano.keys) {
-			if(!piano.keys.hasOwnProperty(i)) continue;
-			var key = piano.keys[i];
-			var ele = document.createElement("div");
-			key.domElement = ele;
-			piano.rootElement.appendChild(ele);
-			// "key sharp cs cs2"
-			ele.note = key.note;
-			ele.id = key.note;
-			ele.className = "key " + (key.sharp ? "sharp " : " ") + key.baseNote + " " + key.note + " loading";
-			var table = $('<table width="100%" height="100%" style="pointer-events:none"></table>');
-			var td = $('<td valign="bottom"></td>');
-			table.append(td);
-			td.valign = "bottom";
-			$(ele).append(table);
-		}
-		// add event listeners
-		var mouse_down = false;
-		$(piano.rootElement).mousedown(function(event) {
-			// todo: IE10 doesn't support the pointer-events css rule on the "blips"
-			var ele = event.target;
-			if($(ele).hasClass("key") && piano.keys.hasOwnProperty(ele.note)) {
-				var key = piano.keys[ele.note];
-				press(key.note);
-				mouse_down = true;
-				event.stopPropagation();
-			};
-			//event.preventDefault();
-		});
-		piano.rootElement.addEventListener("touchstart", function(event) {
-			for(var i in event.changedTouches) {
-				var ele = event.changedTouches[i].target;
-				if($(ele).hasClass("key") && piano.keys.hasOwnProperty(ele.note)) {
-					var key = piano.keys[ele.note];
-					press(key.note);
-					mouse_down = true;
-					event.stopPropagation();
-				}
-			}
-			//event.preventDefault();
-		}, false);
-		$(window).mouseup(function(event) {
-			mouse_down = false;
-		});
-		$(piano.rootElement).mouseover(function(event) {
-			if(!mouse_down) return;
-			var ele = event.target;
-			if($(ele).hasClass("key") && piano.keys.hasOwnProperty(ele.note)) {
-				var key = piano.keys[ele.note];
-				press(key.note);
-			}
-		});
-
-		Renderer.prototype.init.call(this, piano);
-		return this;
-	};
-
-	DOMRenderer.prototype.resize = function(width, height) {
-		Renderer.prototype.resize.call(this, width, height);
-	};
-
-	DOMRenderer.prototype.visualize = function(key, color) {
-		var k = $(key.domElement);
-		k.addClass("play");
-		setTimeout(function(){
-			k.removeClass("play");
-		}, 100);
-		// "blips"
-		var d = $('<div style="width:100%;height:10%;margin:0;padding:0">&nbsp;</div>');
-		d.css("background", color);
-		k.find("td").append(d);
-		d.fadeOut(1000, function(){
-			d.remove();
-		});
 	};
 
 
@@ -766,29 +612,28 @@ Rect.prototype.contains = function(x, y) {
 		if(this.height < this.width * 0.2) this.height = Math.floor(this.width * 0.2);
 		this.canvas.width = this.width;
 		this.canvas.height = this.height;
-		this.canvas.style.width = this.width / devicePixelRatio + "px";
-		this.canvas.style.height = this.height / devicePixelRatio + "px";
+		this.canvas.style.width = this.width / window.devicePixelRatio + "px";
+		this.canvas.style.height = this.height / window.devicePixelRatio + "px";
 		
 		// calculate key sizes
 		this.whiteKeyWidth = Math.floor(this.width / 52);
 		this.whiteKeyHeight = Math.floor(this.height * 0.9);
-		this.blackKeyWidth = Math.floor(this.whiteKeyWidth * 0.75) - 1;
+		this.blackKeyWidth = Math.floor(this.whiteKeyWidth * 0.75);
 		this.blackKeyHeight = Math.floor(this.height * 0.5);
 
 		this.blackKeyOffset = Math.floor(this.whiteKeyWidth - (this.blackKeyWidth / 2));
 		this.keyMovement = Math.floor(this.whiteKeyHeight * 0.015);
 
-		this.whiteBlipWidth = Math.floor(this.whiteKeyWidth - 3);
-		this.whiteBlipHeight = Math.floor(this.whiteBlipWidth * 0.7);
+		this.whiteBlipWidth = Math.floor(this.whiteKeyWidth * 0.7);
+		this.whiteBlipHeight = Math.floor(this.whiteBlipWidth * 0.8);
 		this.whiteBlipX = Math.floor((this.whiteKeyWidth - this.whiteBlipWidth) / 2);
-		this.whiteBlipY = Math.floor(this.whiteKeyHeight - this.whiteBlipHeight - 1);
-		this.blackBlipWidth = Math.floor(this.blackKeyWidth - 2);
-		this.blackBlipHeight = Math.floor(this.blackBlipWidth * 0.7);
-		this.blackBlipY = Math.floor(this.blackKeyHeight - this.blackBlipHeight - 1);
+		this.whiteBlipY = Math.floor(this.whiteKeyHeight - this.whiteBlipHeight * 1.2);
+		this.blackBlipWidth = Math.floor(this.blackKeyWidth * 0.7);
+		this.blackBlipHeight = Math.floor(this.blackBlipWidth * 0.8);
+		this.blackBlipY = Math.floor(this.blackKeyHeight - this.blackBlipHeight * 1.2);
 		this.blackBlipX = Math.floor((this.blackKeyWidth - this.blackBlipWidth) / 2);
 		
 		// prerender white key
-		/*
 		this.whiteKeyRender = document.createElement("canvas");
 		this.whiteKeyRender.width = this.whiteKeyWidth;
 		this.whiteKeyRender.height = this.height + 10;
@@ -830,7 +675,7 @@ Rect.prototype.contains = function(x, y) {
 		ctx.strokeRect(ctx.lineWidth / 2, ctx.lineWidth / 2, this.blackKeyWidth - ctx.lineWidth, this.blackKeyHeight - ctx.lineWidth);
 		ctx.lineWidth = 4;
 		ctx.fillRect(ctx.lineWidth / 2, ctx.lineWidth / 2, this.blackKeyWidth - ctx.lineWidth, this.blackKeyHeight - ctx.lineWidth);
-		*/
+
 		// prerender shadows
 		this.shadowRender = [];
 		var y = -this.canvas.height * 2;
@@ -841,8 +686,8 @@ Rect.prototype.contains = function(x, y) {
 			canvas.height = this.canvas.height;
 			var ctx = canvas.getContext("2d");
 			var sharp = j ? true : false;
-			ctx.lineJoin = "flat";
-			ctx.lineCap = "flat";
+			ctx.lineJoin = "round";
+			ctx.lineCap = "round";
 			ctx.lineWidth = 1;
 			ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
 			ctx.shadowBlur = this.keyMovement * 3;
@@ -869,6 +714,7 @@ Rect.prototype.contains = function(x, y) {
 				}
 			}
 		}
+
 		// update key rects
 		for(var i in this.piano.keys) {
 			if(!this.piano.keys.hasOwnProperty(i)) continue;
@@ -919,10 +765,9 @@ Rect.prototype.contains = function(x, y) {
 				}
 				var x = Math.floor(key.sharp ? this.blackKeyOffset + this.whiteKeyWidth * key.spatial
 					: this.whiteKeyWidth * key.spatial);
-				var clr = gPiano.color + 0x333333;
-				clr = clr > 0xFFFFFF ? 0xFFFFFF : clr;
-				this.ctx.fillStyle = sharp ? "#222222" : '#'+('000000'+clr.toString(16)).slice(-6);
-				this.ctx.fillRect(x, y, sharp ? this.blackKeyWidth : this.whiteKeyWidth-1, sharp ? this.blackKeyHeight : this.whiteKeyHeight);
+				var image = key.sharp ? this.blackKeyRender : this.whiteKeyRender;
+				this.ctx.drawImage(image, x, y);
+
 				// render blips
 				if(key.blips.length) {
 					var alpha = this.ctx.globalAlpha;
@@ -948,12 +793,26 @@ Rect.prototype.contains = function(x, y) {
 							key.blips.splice(b, 1);
 							--b;
 						}
-						y -= h + 1;
+						y -= Math.floor(h * 1.1);
 					}
 				}
 			}
 		}
 		this.ctx.restore();
+	};
+
+	CanvasRenderer.prototype.renderNoteLyrics = function() {
+		// render lyric
+		for(var part_id in this.noteLyrics) {
+			if(!this.noteLyrics.hasOwnProperty(i)) continue;
+			var lyric = this.noteLyrics[part_id];
+			var lyric_x = x;
+			var lyric_y = this.whiteKeyHeight + 1;
+			this.ctx.fillStyle = key.lyric.color;
+			var alpha = this.ctx.globalAlpha;
+			this.ctx.globalAlpha = alpha - ((now - key.lyric.time) / 1000);
+			this.ctx.fillRect(x, y, 10, 10);
+		}
 	};
 
 	CanvasRenderer.prototype.getHit = function(x, y) {
@@ -991,8 +850,8 @@ Rect.prototype.contains = function(x, y) {
 			offy += element.offsetTop;
 		} while(element = element.offsetParent);
 		return {
-			x: (evt.pageX - offx) * devicePixelRatio,
-			y: (evt.pageY - offy) * devicePixelRatio
+			x: (evt.pageX - offx) * window.devicePixelRatio,
+			y: (evt.pageY - offy) * window.devicePixelRatio
 		}
 	};
 
@@ -1002,19 +861,23 @@ Rect.prototype.contains = function(x, y) {
 
 
 
-// Soundpack Stuff by electrashave ♥
+
+
+
+
+// Soundpack Stuff by electrashave â™¥
 
 ////////////////////////////////////////////////////////////////
 
 	function SoundSelector(piano) {
-		this.initialized = false;
-		this.keys = piano.keys;
-		this.loading = {};
-		this.notification;
-		this.packs = [];
-		this.piano = piano;
-		this.soundSelection = localStorage.soundSelection || "MPP Classic";
-		this.addPack({name: "MPP Classic", keys: Object.keys(this.piano.keys), ext: ".wav.mp3", url: "/mp3/"});
+	    this.initialized = false;
+	    this.keys = piano.keys;
+	    this.loading = {};
+	    this.notification;
+	    this.packs = [];
+	    this.piano = piano;
+	    this.soundSelection = localStorage.soundSelection ? localStorage.soundSelection : "MPP Classic";
+	    this.addPack({name: "MPP Classic", keys: Object.keys(this.piano.keys), ext: ".mp3", url: "/sounds/mppclassic/"});
 	}
 
 	SoundSelector.prototype.addPack = function(pack, load) {
@@ -1042,16 +905,16 @@ Rect.prototype.contains = function(x, y) {
 			obj.html = html;
 			self.packs.push(obj);
 			self.packs.sort(function(a, b) {
-				if(a.name < b.name) return -1;
-				if(a.name > b.name) return 1;
-				return 0;
-			});
-			if (load) self.loadPack(obj.name);
-			delete self.loading[obj.url];
+	            if(a.name < b.name) return -1;
+	            if(a.name > b.name) return 1;
+	            return 0;
+	        });
+	        if (load) self.loadPack(obj.name);
+	        delete self.loading[obj.url];
 		}
 
 		if (typeof pack == "string") {
-			$.getJSON(pack + "/info.json").done(function(json) {
+			$.getJSON(pack + "info.json").done(function(json) {
 				json.url = pack;
 				add(json);
 			});
@@ -1066,25 +929,27 @@ Rect.prototype.contains = function(x, y) {
 		var self = this;
 		if (self.initialized) return console.warn("Sound selector already initialized!");
 
-		if (!!Object.keys(self.loading).length) return setTimeout(function() {
-			self.init();
-		}, 250);
+	    if (!!Object.keys(self.loading).length) return setTimeout(function() {
+	        self.init();
+	    }, 250);
 
-		$("#sound-btn").on("click", function() {
-			if (document.getElementById("Notification-Sound-Selector") != null) return self.notification.close();
+	    $("#sound-btn").on("click", function() {
+			if (document.getElementById("Notification-Sound-Selector") != null)
+				return self.notification.close();
 			var html = document.createElement("ul");
-			$(html).append("<h1>Current Sound: " + self.soundSelection + "</h1>");
+	        //$(html).append("<p>Current Sound: " + self.soundSelection + "</p>");
 
-			for (var i = 0; self.packs.length > i; i++) {
+	        for (var i = 0; self.packs.length > i; i++) {
 				var pack = self.packs[i];
 				if (pack.name == self.soundSelection) pack.html.classList = "pack enabled";
 				else pack.html.classList = "pack";
 				html.appendChild(pack.html);
-			}
-			self.notification = new Notification({title: "Sound Selector:", html: html, id: "Sound-Selector", duration: -1, target: "#sound-btn"});
-		});
-		self.initialized = true;
-		self.loadPack(self.soundSelection, true);
+	        }
+
+			self.notification = new Notification({title: "Sound Selector", html: html, id: "Sound-Selector", duration: -1, target: "#sound-btn"});
+	    });
+	    self.initialized = true;
+	    self.loadPack(self.soundSelection, true);
 	};
 
 	SoundSelector.prototype.loadPack = function(pack, f) {
@@ -1097,7 +962,7 @@ Rect.prototype.contains = function(x, y) {
 		}
 		if (typeof pack == "string") {
 			console.warn("Sound pack does not exist! Loading default pack...");
-			return this.loadPack("MPP Classic");
+	        return this.loadPack("MPP Classic");
 		}
 
 		if (pack.name == this.soundSelection && !f) return;
@@ -1109,18 +974,18 @@ Rect.prototype.contains = function(x, y) {
 
 		var self = this;
 		for (var i in this.piano.keys) {
-			if (!this.piano.keys.hasOwnProperty(i)) continue;
-			(function() {
-				var key = self.piano.keys[i];
-				key.loaded = false;
-				self.piano.audio.load(key.note, pack.url + key.note + pack.ext, function() {
-					key.loaded = true;
-					key.timeLoaded = Date.now();
-				});
-			})();
-		}
-		localStorage.soundSelection = pack.name;
-		this.soundSelection = pack.name;
+	        if (!this.piano.keys.hasOwnProperty(i)) continue;
+	        (function() {
+	            var key = self.piano.keys[i];
+	            key.loaded = false;
+	            self.piano.audio.load(key.note, pack.url + key.note + pack.ext, function() {
+	                key.loaded = true;
+	                key.timeLoaded = Date.now();
+	            });
+	        })();
+	    }
+	    if(localStorage) localStorage.soundSelection = pack.name;
+	    this.soundSelection = pack.name;
 	};
 
 	SoundSelector.prototype.removePack = function(name) {
@@ -1135,6 +1000,8 @@ Rect.prototype.contains = function(x, y) {
 		}
 		if (!found) console.warn("Sound pack not found!");
 	};
+
+
 
 
 
@@ -1198,8 +1065,7 @@ Rect.prototype.contains = function(x, y) {
 		}
 
 
-		var render_engine = CanvasRenderer.isSupported() ? CanvasRenderer : DOMRenderer;
-		this.renderer = new render_engine().init(this);
+		this.renderer = new CanvasRenderer().init(this);
 		
 		window.addEventListener("resize", function() {
 			piano.renderer.resize();
@@ -1208,86 +1074,39 @@ Rect.prototype.contains = function(x, y) {
 
 		window.AudioContext = window.AudioContext || window.webkitAudioContext || undefined;
 		var audio_engine = AudioEngineWeb;
-
-		this.audio = new audio_engine().init(/*function() {
-			for(var i in piano.keys) {
-				if(!piano.keys.hasOwnProperty(i)) continue;
-				(function() {
-					var key = piano.keys[i];
-					piano.audio.load(key.note, gSoundPath + key.note + gSoundExt, function() {
-						key.loaded = true;
-						key.timeLoaded = Date.now();
-						if(key.domElement) // todo: move this to renderer somehow
-							$(key.domElement).removeClass("loading");
-					});
-				})();
-			}
-		}*/);
-		this.audio.lramp = 0.2;
-		this.audio.sstop = 0.21;
-		this.audio.lramps = 0.16;
-		this.audio.lramps2 = 0.4;
-		this.audio.sstops = 0.41;
-		this.audio.minvol = 0.05;
+		this.audio = new audio_engine().init();
 	};
 
-	Piano.prototype.play = function(note, vol, participant, delay_ms) {
-		if(!this.keys.hasOwnProperty(note)) return;
+	Piano.prototype.play = function(note, vol, participant, delay_ms, lyric) {
+		if(!this.keys.hasOwnProperty(note) || !participant) return;
 		var key = this.keys[note];
-		if(key.loaded&&vol>this.audio.minvol) this.audio.play(key.note, vol, delay_ms, participant.id);
-		if(typeof gMidiOutTest === "function") gMidiOutTest(key.note, vol * 100, delay_ms);
+		if(key.loaded) this.audio.play(key.note, vol, delay_ms, participant.id);
+		if(gMidiOutTest) gMidiOutTest(key.note, vol * 100, delay_ms);
 		var self = this;
-		var jq_namediv = $(typeof participant == "undefined" ? null : participant.nameDiv);
-		if(jq_namediv && !jq_namediv.hasClass("playing")) {
+		setTimeout(function() {
+			self.renderer.visualize(key, participant.color);
+			if(lyric) {
+
+			}
+			var jq_namediv = $(participant.nameDiv);
+			jq_namediv.addClass("play");
 			setTimeout(function() {
-				self.renderer.visualize(key, typeof participant == "undefined" ? "yellow" : (participant.color || "#777"));
-				jq_namediv.addClass("play");
-				setTimeout(function() {
-					jq_namediv.removeClass("play");
-				}, 30);
-			}, delay_ms);
-		}
+				jq_namediv.removeClass("play");
+			}, 30);
+		}, delay_ms || 0);
 	};
 
 	Piano.prototype.stop = function(note, participant, delay_ms) {
 		if(!this.keys.hasOwnProperty(note)) return;
 		var key = this.keys[note];
 		if(key.loaded) this.audio.stop(key.note, delay_ms, participant.id);
-		if(typeof gMidiOutTest === "function") gMidiOutTest(key.note, 0, delay_ms);
+		if(gMidiOutTest) gMidiOutTest(key.note, 0, delay_ms);
 	};
 	
 	var gPiano = new Piano(document.getElementById("piano"));
 	
 	var gSoundSelector = new SoundSelector(gPiano);
-	gSoundSelector.addPacks([
-	/*	"/sounds/Emotional_2.0/",
-		"/sounds/Harp/",
-		"/sounds/Music_Box/",
-		"/sounds/Vintage_Upright/",
-		"/sounds/Steinway_Grand/",
-		"/sounds/Emotional/",
-		"/sounds/Untitled/"*/
-		"https://ledlamp.github.io/piano-sounds/Emotional/",
-		"https://ledlamp.github.io/piano-sounds/Emotional_2.0/",
-		"https://ledlamp.github.io/piano-sounds/GreatAndSoftPiano/",
-		"https://ledlamp.github.io/piano-sounds/HardAndToughPiano/",
-		"https://ledlamp.github.io/piano-sounds/HardPiano/",
-		"https://ledlamp.github.io/piano-sounds/Harp/",
-		"https://ledlamp.github.io/piano-sounds/Harpsicord/",
-		"https://ledlamp.github.io/piano-sounds/LoudAndProudPiano/",
-		"https://ledlamp.github.io/piano-sounds/MLG/",
-		"https://ledlamp.github.io/piano-sounds/Music_Box/",
-		"https://ledlamp.github.io/piano-sounds/NewPiano/",
-		"https://ledlamp.github.io/piano-sounds/Orchestra/",
-		"https://ledlamp.github.io/piano-sounds/Piano2/",
-		"https://ledlamp.github.io/piano-sounds/PianoSounds/",
-		"https://ledlamp.github.io/piano-sounds/Rhodes_MK1/",
-		"https://ledlamp.github.io/piano-sounds/SoftPiano/",
-		"https://ledlamp.github.io/piano-sounds/Steinway_Grand/",
-		"https://ledlamp.github.io/piano-sounds/Untitled/",
-		"https://ledlamp.github.io/piano-sounds/Vintage_Upright/",
-		"https://ledlamp.github.io/piano-sounds/Vintage_Upright_Soft/"
-	]);
+	gSoundSelector.addPacks(["/sounds/Emotional_2.0/", "/sounds/Harp/", "/sounds/Music_Box/", "/sounds/Vintage_Upright/", "/sounds/Steinway_Grand/", "/sounds/Emotional/", "/sounds/Untitled/"]);
 	gSoundSelector.init();
 
 
@@ -1295,6 +1114,8 @@ Rect.prototype.contains = function(x, y) {
 
 
 
+
+	var gAutoSustain = false;
 	var gSustain = false;
 
 	var gHeldNotes = {};
@@ -1313,7 +1134,7 @@ Rect.prototype.contains = function(x, y) {
 	function release(id) {
 		if(gHeldNotes[id]) {
 			gHeldNotes[id] = false;
-			if(gSustain && !enableSynth) {
+			if((gAutoSustain || gSustain) && !enableSynth) {
 				gSustainedNotes[id] = true;
 			} else {
 				if(gNoteQuota.spend(1)) {
@@ -1331,12 +1152,14 @@ Rect.prototype.contains = function(x, y) {
 
 	function releaseSustain() {
 		gSustain = false;
-		for(var id in gSustainedNotes) {
-			if(gSustainedNotes.hasOwnProperty(id) && gSustainedNotes[id] && !gHeldNotes[id]) {
-				gSustainedNotes[id] = false;
-				if(gNoteQuota.spend(1)) {
-					gPiano.stop(id, gClient.getOwnParticipant(), 0);
-					gClient.stopNote(id);
+		if(!gAutoSustain) {
+			for(var id in gSustainedNotes) {
+				if(gSustainedNotes.hasOwnProperty(id) && gSustainedNotes[id] && !gHeldNotes[id]) {
+					gSustainedNotes[id] = false;
+					if(gNoteQuota.spend(1)) {
+						gPiano.stop(id, gClient.getOwnParticipant(), 0);
+						gClient.stopNote(id);
+					}
 				}
 			}
 		}
@@ -1348,17 +1171,33 @@ Rect.prototype.contains = function(x, y) {
 
 
 
-
+	function getParameterByName(name, url = window.location.href) {
+		name = name.replace(/[\[\]]/g, '\\$&');
+		var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+			results = regex.exec(url);
+		if (!results) return null;
+		if (!results[2]) return '';
+		return decodeURIComponent(results[2].replace(/\+/g, ' '));
+	}
 
 // internet science
 
 ////////////////////////////////////////////////////////////////
 
-	var channel_id = decodeURIComponent(window.location.hash.substr(1)) || "lobby";
-	var gClient = new Client("wss://mppws.cf");
+	var channel_id = decodeURIComponent(getParameterByName('c'));
+	if(channel_id.substr(0, 1) == "/") channel_id = channel_id.substr(1);
+	if(channel_id == "") channel_id = "lobby";
+
+	var isProd =  window.location.hostname.includes('multiplayerpiano.com')
+	var wssport = isProd ? 443 : 8081;
+	var protocol = isProd ? 'wss' : 'ws'////
+	var gClient = new Client(protocol + "://" + (isProd ? 'app.multiplayerpiano.com' : window.location.hostname) + ":" + wssport);
 	gClient.setChannel(channel_id);
 	gClient.start();
 
+	gClient.on("disconnect", function(evt) {
+		console.log(evt);
+	});
 
 	// Setting status
 	(function() {
@@ -1399,9 +1238,6 @@ Rect.prototype.contains = function(x, y) {
 			}
 			if(gChatMutes.indexOf(part._id) !== -1) {
 				$(part.nameDiv).addClass("muted-chat");
-			}
-			if(EXT.draw && EXT.draw.mutes.indexOf(part._id) !== -1){
-				$(part.nameDiv).addClass("muted-lines");
 			}
 			div.style.display = "none";
 			part.nameDiv = $("#names")[0].appendChild(div);
@@ -1479,11 +1315,6 @@ Rect.prototype.contains = function(x, y) {
 					} else {
 						$(part.nameDiv).removeClass("muted-notes");
 					}
-					if(EXT.draw && EXT.draw.mutes.indexOf(part._id) !== -1){
-		                                $(part.nameDiv).addClass("muted-lines");
-		                        } else {
-						$(part.nameDiv).removeClass("muted-lines");
-					}
 					if(gChatMutes.indexOf(part._id) !== -1) {
 						$(part.nameDiv).addClass("muted-chat");
 					} else {
@@ -1492,6 +1323,15 @@ Rect.prototype.contains = function(x, y) {
 				}
 			}
 		});
+		function updateCursor(msg) {
+			const part = gClient.ppl[msg.id];
+			if (part && part.cursorDiv) {
+				part.cursorDiv.style.left = msg.x + "%";
+				part.cursorDiv.style.top = msg.y + "%";
+			}
+		}
+		gClient.on("m", updateCursor);
+		gClient.on("participant added", updateCursor);
 	})();
 
 
@@ -1563,7 +1403,9 @@ Rect.prototype.contains = function(x, y) {
 				gPiano.stop(note.n, participant, ms);
 			} else {
 				var vel = (typeof note.v !== "undefined")? parseFloat(note.v) : DEFAULT_VELOCITY;
-				if(vel < 0) vel = 0; else if (vel > 1) vel = 1;
+				if(!vel) vel = 0;
+				else if(vel < 0) vel = 0;
+				else if (vel > 1) vel = 1;
 				gPiano.play(note.n, vel, participant, ms);
 				if(enableSynth) {
 					gPiano.stop(note.n, participant, ms + 1000);
@@ -1579,6 +1421,9 @@ Rect.prototype.contains = function(x, y) {
 			last_mx = mx;
 			last_my = my;
 			gClient.sendArray([{m: "m", x: mx, y: my}]);
+			if(gSeeOwnCursor) {
+				gClient.emit("m", { m: "m", id: gClient.participantId, x: mx, y: my });
+			}
 			var part = gClient.getOwnParticipant();
 			if(part) {
 				part.x = mx;
@@ -1590,20 +1435,6 @@ Rect.prototype.contains = function(x, y) {
 		mx = ((event.pageX / $(window).width()) * 100).toFixed(2);
 		my = ((event.pageY / $(window).height()) * 100).toFixed(2);
 	});
-
-	// Animate cursors
-	setInterval(function() {
-		for(var id in gClient.ppl) {
-			if(!gClient.ppl.hasOwnProperty(id)) continue;
-			var part = gClient.ppl[id];
-			if(part.cursorDiv && (Math.abs(part.x - part.displayX) > 0.1 || Math.abs(part.y - part.displayY) > 0.1)) {
-				part.displayX += (part.x - part.displayX) * 0.225;
-				part.displayY += (part.y - part.displayY) * 0.225;
-				part.cursorDiv.style.left = part.displayX + "%";
-				part.cursorDiv.style.top = part.displayY + "%";
-			}
-		}
-	}, 1000 / 60); /* 60 fps */
 
 
 	// Room settings button
@@ -1634,12 +1465,13 @@ Rect.prototype.contains = function(x, y) {
 				crownsolo: $("#room-settings .checkbox[name=crownsolo]").is(":checked"),
 				color: $("#room-settings input[name=color]").val()
 			};
-			gClient.sendArray([{m: "chset", set: settings}]);
+			gClient.setChannelSettings(settings);
 			closeModal();
 		});
 		$("#room-settings .drop-crown").click(function() {
-			gClient.sendArray([{m: "chown"}]);
 			closeModal();
+			if(confirm("This will drop the crown...!"))
+				gClient.sendArray([{m: "chown"}]);
 		});
 	})();
 
@@ -1672,27 +1504,38 @@ Rect.prototype.contains = function(x, y) {
 
 	// Crownsolo notice
 	gClient.on("ch", function(msg) {
+		let notice = "";
+		let has_notice = false;
 		if(msg.ch.settings.crownsolo) {
-			if($("#crownsolo-notice").length == 0) {
-				$('<div id="crownsolo-notice">').text('This room is set to "only the owner can play."').appendTo("body").fadeIn(1000);
-			}
+			has_notice = true;
+			notice += '<p>This room is set to "only the owner can play."</p>';
+		}
+		if(msg.ch.settings['no cussing']){
+			has_notice = true;
+			notice += '<p>This room is set to "no cussing."</p>';
+		}
+		let notice_div = $("#room-notice");
+		if(has_notice) {
+			notice_div.html(notice);
+			if(notice_div.is(':hidden')) notice_div.fadeIn(1000);
 		} else {
-			$("#crownsolo-notice").remove();
+			if(notice_div.is(':visible')) notice_div.fadeOut(1000);
 		}
 	});
 	gClient.on("disconnect", function() {
-		$("#crownsolo-notice").remove();
+		$("#room-notice").fadeOut(1000);
 	});
 
 
 	// Background color
 	(function() {
-		var old_color1 = new Color("#242464");
-		var old_color2 = new Color("#242464");
-		function setColor(hex) {
+		var old_color1 = new Color("#000000");
+		var old_color2 = new Color("#000000");
+		function setColor(hex, hex2) {
 			var color1 = new Color(hex);
-			var color2 = new Color(hex);
-			color2.add(-0x40, -0x40, -0x40);
+			var color2 = new Color(hex2 || hex);
+			if(!hex2)
+				color2.add(-0x40, -0x40, -0x40);
 
 			var bottom = document.getElementById("bottom");
 			
@@ -1704,34 +1547,40 @@ Rect.prototype.contains = function(x, y) {
 			difference.r -= old_color1.r;
 			difference.g -= old_color1.g;
 			difference.b -= old_color1.b;
-			var inc = new Color(difference.r / steps, difference.g / steps, difference.b / steps);
+			var inc1 = new Color(difference.r / steps, difference.g / steps, difference.b / steps);
+			difference = new Color(color2.r, color2.g, color2.b);
+			difference.r -= old_color2.r;
+			difference.g -= old_color2.g;
+			difference.b -= old_color2.b;
+			var inc2 = new Color(difference.r / steps, difference.g / steps, difference.b / steps);
 			var iv;
 			iv = setInterval(function() {
-				old_color1.add(inc.r, inc.g, inc.b);
-				old_color2.add(inc.r, inc.g, inc.b);
+				old_color1.add(inc1.r, inc1.g, inc1.b);
+				old_color2.add(inc2.r, inc2.g, inc2.b);
 				document.body.style.background = "radial-gradient(ellipse at center, "+old_color1.toHexa()+" 0%,"+old_color2.toHexa()+" 100%)";
 				bottom.style.background = old_color2.toHexa();
-				gPiano.color = +("0x" + old_color2.toHexa().slice(1));
-				//console.log("0x" + old_color2.toHexa().slice(1));
 				if(++step >= steps) {
 					clearInterval(iv);
 					old_color1 = color1;
 					old_color2 = color2;
 					document.body.style.background = "radial-gradient(ellipse at center, "+color1.toHexa()+" 0%,"+color2.toHexa()+" 100%)";
 					bottom.style.background = color2.toHexa();
-					gPiano.color = +("0x" + color2.toHexa().slice(1));
 				}
 			}, step_ms);
 		}
 
-		setColor("#242464");
+		function setColorToDefault() {
+			setColor("#000000", "#000000");
+		}
+
+		setColorToDefault();
 
 		gClient.on("ch", function(ch) {
 			if(ch.ch.settings) {
 				if(ch.ch.settings.color) {
-					setColor(ch.ch.settings.color);
+					setColor(ch.ch.settings.color, ch.ch.settings.color2);
 				} else {
-					setColor("#242464");
+					setColorToDefault();
 				}
 			}
 		});
@@ -1741,10 +1590,8 @@ Rect.prototype.contains = function(x, y) {
 
 
 
-
-	var gPianoMutes = [];
-
-	var gChatMutes = [];
+	var gPianoMutes = (localStorage.pianoMutes ? localStorage.pianoMutes : "").split(',').filter(v => v);
+	var gChatMutes = (localStorage.pianoMutes ? localStorage.pianoMutes : "").split(',').filter(v => v);
 
 
  	
@@ -1764,11 +1611,18 @@ Rect.prototype.contains = function(x, y) {
 
 
 
-	var volume_slider = new VolumeSlider(document.getElementById("volume"), function(v) {
+	var volume_slider = document.getElementById("volume-slider");
+	volume_slider.value = gPiano.audio.volume;
+	$("#volume-label").text("Volume: " + Math.floor(gPiano.audio.volume * 100) + "%");
+	volume_slider.addEventListener("input", function(evt) {
+		var v = +volume_slider.value;
 		gPiano.audio.setVolume(v);
-		if(window.localStorage) localStorage.volume = v;
+		if (window.localStorage) localStorage.volume = v;
+		$("#volume-label").text("Volume: " + Math.floor(v * 100) + "%");
 	});
-	volume_slider.set(gPiano.audio.volume);
+
+
+
 
 	var Note = function(note, octave) {
 		this.note = note;
@@ -1778,7 +1632,7 @@ Rect.prototype.contains = function(x, y) {
 
 
 	var n = function(a, b) { return {note: new Note(a, b), held: false}; };
-	gPiano.key_binding = {
+	var key_binding = {
 		65: n("gs"),
 		90: n("a"),
 		83: n("as"),
@@ -1816,8 +1670,10 @@ Rect.prototype.contains = function(x, y) {
 		79: n("b", 2),
 		80: n("c", 3),
 		189: n("cs", 3),
+		173: n("cs", 3), // firefox why
 		219: n("d", 3),
 		187: n("ds", 3),
+		61: n("ds", 3), // firefox why
 		221: n("e", 3)
 	};
 
@@ -1828,8 +1684,8 @@ Rect.prototype.contains = function(x, y) {
 	function handleKeyDown(evt) {
 		//console.log(evt);
 		var code = parseInt(evt.keyCode);
-		if(gPiano.key_binding[code] !== undefined) {
-			var binding = gPiano.key_binding[code];
+		if(key_binding[code] !== undefined) {
+			var binding = key_binding[code];
 			if(!binding.held) {
 				binding.held = true;
 
@@ -1865,15 +1721,15 @@ Rect.prototype.contains = function(x, y) {
 		} else if(code == 9) { // Tab (don't tab away from the piano)
 			evt.preventDefault();
 		} else if(code == 8) { // Backspace (don't navigate Back)
-			gSustain = !gSustain;
+			gAutoSustain = !gAutoSustain;
 			evt.preventDefault();
 		}
 	};
 
 	function handleKeyUp(evt) {
 		var code = parseInt(evt.keyCode);
-		if(gPiano.key_binding[code] !== undefined) {
-			var binding = gPiano.key_binding[code];
+		if(key_binding[code] !== undefined) {
+			var binding = key_binding[code];
 			if(binding.held) {
 				binding.held = false;
 				
@@ -2012,11 +1868,9 @@ Rect.prototype.contains = function(x, y) {
 			// move menu to name position
 			var jq_nd = $(part.nameDiv);
 			var pos = jq_nd.position();
-			var leftadj = pos.left + 6;
-			leftadj = leftadj + 150 > window.innerWidth ? pos.left - jq_nd[0].offsetWidth + 6 : leftadj;
 			menu.css({
 				"top": pos.top + jq_nd.height() + 15,
-				"left": leftadj,
+				"left": pos.left + 6,
 				"background": part.color || "black"
 			});
 			menu.on("mousedown touchstart", function(evt) {
@@ -2036,6 +1890,7 @@ Rect.prototype.contains = function(x, y) {
 				$('<div class="menu-item">Mute Notes</div>').appendTo(menu)
 				.on("mousedown touchstart", function(evt) {
 					gPianoMutes.push(part._id);
+					if(localStorage) localStorage.pianoMutes = gPianoMutes.join(',');
 					$(part.nameDiv).addClass("muted-notes");
 				});
 			} else {
@@ -2044,30 +1899,15 @@ Rect.prototype.contains = function(x, y) {
 					var i;
 					while((i = gPianoMutes.indexOf(part._id)) != -1)
 						gPianoMutes.splice(i, 1);
+					if(localStorage) localStorage.pianoMutes = gPianoMutes.join(',');
 					$(part.nameDiv).removeClass("muted-notes");
 				});
-			}
-			if(EXT.draw){
-				if(EXT.draw.mutes.indexOf(part._id) == -1) {
-					$('<div class="menu-item">Mute Lines</div>').appendTo(menu)
-					.on("mousedown touchstart", function(evt) {
-						EXT.draw.mutes.push(part._id);
-						$(part.nameDiv).addClass("muted-lines");
-					});
-				} else {
-					$('<div class="menu-item">Unmute Lines</div>').appendTo(menu)
-					.on("mousedown touchstart", function(evt) {
-						var i;
-						while((i = EXT.draw.mutes.indexOf(part._id)) != -1)
-							EXT.draw.mutes.splice(i, 1);
-						$(part.nameDiv).removeClass("muted-lines");
-					});
-				}
 			}
 			if(gChatMutes.indexOf(part._id) == -1) {
 				$('<div class="menu-item">Mute Chat</div>').appendTo(menu)
 				.on("mousedown touchstart", function(evt) {
 					gChatMutes.push(part._id);
+					if(localStorage) localStorage.chatMutes = gChatMutes.join(',');
 					$(part.nameDiv).addClass("muted-chat");
 				});
 			} else {
@@ -2076,23 +1916,22 @@ Rect.prototype.contains = function(x, y) {
 					var i;
 					while((i = gChatMutes.indexOf(part._id)) != -1)
 						gChatMutes.splice(i, 1);
+					if(localStorage) localStorage.chatMutes = gChatMutes.join(',');
 					$(part.nameDiv).removeClass("muted-chat");
 				});
 			}
-			if(!(gPianoMutes.indexOf(part._id) >= 0) || !(gChatMutes.indexOf(part._id) >= 0) || !(EXT.draw && EXT.draw.mutes.indexOf(part._id) >= 0)) {
+			if(!(gPianoMutes.indexOf(part._id) >= 0) || !(gChatMutes.indexOf(part._id) >= 0)) {
 				$('<div class="menu-item">Mute Completely</div>').appendTo(menu)
 				.on("mousedown touchstart", function(evt) {
 					gPianoMutes.push(part._id);
+					if(localStorage) localStorage.pianoMutes = gPianoMutes.join(',');
 					gChatMutes.push(part._id);
-					if(EXT.draw){
-						EXT.draw.mutes.push(part._id);
-						$(part.nameDiv).addClass("muted-lines");
-					}
+					if(localStorage) localStorage.chatMutes = gChatMutes.join(',');
 					$(part.nameDiv).addClass("muted-notes");
 					$(part.nameDiv).addClass("muted-chat");
 				});
 			}
-			if((gPianoMutes.indexOf(part._id) >= 0) || (gChatMutes.indexOf(part._id) >= 0) || (EXT.draw && EXT.draw.mutes.indexOf(part._id) >= 0)) {
+			if((gPianoMutes.indexOf(part._id) >= 0) || (gChatMutes.indexOf(part._id) >= 0)) {
 				$('<div class="menu-item">Unmute Completely</div>').appendTo(menu)
 				.on("mousedown touchstart", function(evt) {
 					var i;
@@ -2100,11 +1939,8 @@ Rect.prototype.contains = function(x, y) {
 						gPianoMutes.splice(i, 1);
 					while((i = gChatMutes.indexOf(part._id)) != -1)
 						gChatMutes.splice(i, 1);
-					if(EXT.draw){
-						while((i = EXT.draw.mutes.indexOf(part._id)) != -1)
-                                                        EXT.draw.mutes.splice(i, 1);
-                                                $(part.nameDiv).removeClass("muted-lines");
-					}
+					if(localStorage) localStorage.pianoMutes = gPianoMutes.join(',');
+					if(localStorage) localStorage.chatMutes = gChatMutes.join(',');
 					$(part.nameDiv).removeClass("muted-notes");
 					$(part.nameDiv).removeClass("muted-chat");
 				});
@@ -2112,7 +1948,8 @@ Rect.prototype.contains = function(x, y) {
 			if(gClient.isOwner()) {
 				$('<div class="menu-item give-crown">Give Crown</div>').appendTo(menu)
 				.on("mousedown touchstart", function(evt) {
-					gClient.sendArray([{m: "chown", id: part.id}]);
+					if(confirm("Give room ownership to "+part.name+"?"))
+						gClient.sendArray([{m: "chown", id: part.id}]);
 				});
 				$('<div class="menu-item kickban">Kickban</div>').appendTo(menu)
 				.on("mousedown touchstart", function(evt) {
@@ -2147,6 +1984,7 @@ Rect.prototype.contains = function(x, y) {
 ////////////////////////////////////////////////////////////////
 
 	var Notification = function(par) {
+		if(this instanceof Notification === false) throw("yeet");
 		EventEmitter.call(this);
 
 		var par = par || {};
@@ -2165,7 +2003,7 @@ Rect.prototype.contains = function(x, y) {
 			eles.remove();
 		}
 		this.domElement = $('<div class="notification"><div class="notification-body"><div class="title"></div>' +
-			'<div class="text"></div></div><div class="x">x</div></div>');
+			'<div class="text"></div></div><div class="x">â“</div></div>');
 		this.domElement[0].id = this.id;
 		this.domElement.addClass(this["class"]);
 		this.domElement.find(".title").text(this.title);
@@ -2241,22 +2079,12 @@ Rect.prototype.contains = function(x, y) {
 
 	var gKeyboardSeq = 0;
 	var gKnowsYouCanUseKeyboard = false;
-	var gKnowsYouCanDrawWithShiftAndClick = false;
 	if(localStorage && localStorage.knowsYouCanUseKeyboard) gKnowsYouCanUseKeyboard = true;
-	if(localStorage && localStorage.knowsYouCanDrawWithShiftAndClick) gKnowsYouCanDrawWithShiftAndClick = true;
 	if(!gKnowsYouCanUseKeyboard) {
 		window.gKnowsYouCanUseKeyboardTimeout = setTimeout(function() {
 			window.gKnowsYouCanUseKeyboardNotification = new Notification({title: "Did you know!?!",
 				text: "You can play the piano with your keyboard, too.  Try it!", target: "#piano", duration: 10000});
 		}, 30000);
-	}
-	if(!gKnowsYouCanDrawWithShiftAndClick){
-		window.gKnowsYouCanDrawWithShiftAndClickTimeout = setTimeout(function(){
-			gKnowsYouCanDrawWithShiftAndClick = true;
-			if(localStorage) localStorage.knowsYouCanDrawWithShiftAndClick = true;
-			window.gKnowsYouCanDrawWithShiftAndClickNotification = new Notification({title: "DID YOU KNOW?!?!?!",
-				text: "You can draw on the screen with shift + click (and drag)! Other players will see it. Try it!", target: "#piano", duration: 10000});
-		}, 50000);
 	}
 
 
@@ -2265,8 +2093,9 @@ Rect.prototype.contains = function(x, y) {
 	if(window.localStorage) {
 
 		if(localStorage.volume) {
-			volume_slider.set(localStorage.volume);
+			volume_slider.value = localStorage.volume;
 			gPiano.audio.setVolume(localStorage.volume);
+			$("#volume-label").text("Volume: " + Math.floor(gPiano.audio.volume * 100) + "%");
 		}
 		else localStorage.volume = gPiano.audio.volume;
 
@@ -2276,6 +2105,18 @@ Rect.prototype.contains = function(x, y) {
 		localStorage.gHasBeenHereBefore = true;
 		
 	}
+	
+	
+	
+	
+	// warn user about loud noises before starting sound (no autoplay)
+	openModal("#sound-warning");
+	var user_interact = function(evt) {
+		document.removeEventListener("click", user_interact);
+		closeModal();
+		MPP.piano.audio.resume();
+	}
+	document.addEventListener("click", user_interact);
 
 
 
@@ -2304,6 +2145,8 @@ Rect.prototype.contains = function(x, y) {
 		else info.removeClass("no-chat");
 		if(channel.settings.crownsolo) info.addClass("crownsolo");
 		else info.removeClass("crownsolo");
+		if(channel.settings['no cussing']) info.addClass("no-cussing");
+		else info.removeClass("no-cussing");
 		if(!channel.settings.visible) info.addClass("not-visible");
 		else info.removeClass("not-visible");
 	});
@@ -2324,8 +2167,12 @@ Rect.prototype.contains = function(x, y) {
 			else info.removeClass("no-chat");
 			if(room.settings.crownsolo) info.addClass("crownsolo");
 			else info.removeClass("crownsolo");
+			if(room.settings['no cussing']) info.addClass("no-cussing");
+			else info.removeClass("no-cussing");
 			if(!room.settings.visible) info.addClass("not-visible");
 			else info.removeClass("not-visible");
+			if(room.banned) info.addClass("banned");
+			else info.removeClass("banned");
 		}
 	});
 	$("#room").on("click", function(evt) {
@@ -2365,13 +2212,13 @@ Rect.prototype.contains = function(x, y) {
 	$("#play-alone-btn").on("click", function(evt) {
 		evt.stopPropagation();
 		var room_name = "Room" + Math.floor(Math.random() * 1000000000000);
-		changeRoom(room_name, "right", {"visible": false, "chat": true, "crownsolo": false});
-/*		setTimeout(function() {
+		changeRoom(room_name, "right", {"visible": false});
+		setTimeout(function() {
 			new Notification({id: "share", title: "Playing alone", html: 'You are playing alone in a room by yourself, but you can always invite \
 				friends by sending them the link.<br/><br/>\
 				<a href="#" onclick="window.open(\'https://www.facebook.com/sharer/sharer.php?u=\'+encodeURIComponent(location.href),\'facebook-share-dialog\',\'width=626,height=436\');return false;">Share on Facebook</a><br/><br/>\
 				<a href="http://twitter.com/home?status='+encodeURIComponent(location.href)+'" target="_blank">Tweet</a>', duration: 25000});
-		}, 1000);*/
+		}, 1000);
 	});
 
 	
@@ -2387,7 +2234,7 @@ Rect.prototype.contains = function(x, y) {
 	};
 	
 	function openModal(selector, focus) {
-		chat.blur();
+		if(chat) chat.blur();
 		releaseKeyboard();
 		$(document).on("keydown", modalHandleEsc);
 		$("#modal #modals > *").hide();
@@ -2418,17 +2265,16 @@ Rect.prototype.contains = function(x, y) {
 			var name = $("#new-room .text[name=name]").val();
 			var settings = {
 				visible: $("#new-room .checkbox[name=visible]").is(":checked"),
-				chat: true,
-				crownsolo: false
+				chat: true
 			};
 			$("#new-room .text[name=name]").val("");
 			closeModal();
 			changeRoom(name, "right", settings);
-			/*setTimeout(function() {
-			new Notification({id: "share", title: "Created a Room", html: 'You can invite friends to your room by sending them the link.<br/><br/>\
-				<a href="#" onclick="window.open(\'https://www.facebook.com/sharer/sharer.php?u=\'+encodeURIComponent(location.href),\'facebook-share-dialog\',\'width=626,height=436\');return false;">Share on Facebook</a><br/><br/>\
-				<a href="http://twitter.com/home?status='+encodeURIComponent(location.href)+'" target="_blank">Tweet</a>', duration: 25000});
-		}, 1000);*/
+			setTimeout(function() {
+				new Notification({id: "share", title: "Created a Room", html: 'You can invite friends to your room by sending them the link.<br/><br/>\
+					<a href="#" onclick="window.open(\'https://www.facebook.com/sharer/sharer.php?u=\'+encodeURIComponent(location.href),\'facebook-share-dialog\',\'width=626,height=436\');return false;">Share on Facebook</a><br/><br/>\
+					<a href="http://twitter.com/home?status='+encodeURIComponent(location.href)+'" target="_blank">Tweet</a>', duration: 25000});
+			}, 1000);
 		};
 		$("#new-room .submit").click(function(evt) {
 			submit();
@@ -2463,14 +2309,13 @@ Rect.prototype.contains = function(x, y) {
 		if(name == "") name = "lobby";
 		if(gClient.channel && gClient.channel._id === name) return;
 		if(push) {
-			/*var url = "" + encodeURIComponent(name).replace("'", "%27");
+			var url = "?c=" + encodeURIComponent(name).replace("'", "%27");
 			if(window.history && history.pushState) {
 				history.pushState({"depth": gHistoryDepth += 1, "name": name}, "Piano > " + name, url);
 			} else {
 				window.location = url;
 				return;
-			}*/
-			window.location.hash = encodeURIComponent(name);
+			}
 		}
 		
 		gClient.setChannel(name, settings);
@@ -2578,7 +2423,7 @@ Rect.prototype.contains = function(x, y) {
 			}
 		});
 		gClient.on("disconnect", function(msg) {
-			chat.hide();
+
 		});
 		gClient.on("c", function(msg) {
 			chat.clear();
@@ -2630,17 +2475,19 @@ Rect.prototype.contains = function(x, y) {
 		});
 		$("#chat input").on("keydown", function(evt) {
 			if(evt.keyCode == 13) {
-				var message = $(this).val();
-				if(message.length == 0) {
-					setTimeout(function() {
-						chat.blur();
-					}, 100);
-				} else if(message.length <= 512) {
-					chat.send(message);
-					$(this).val("");
-					setTimeout(function() {
-						chat.blur();
-					}, 100);
+				if(MPP.client.isConnected()) {
+					var message = $(this).val();
+					if(message.length == 0) {
+						setTimeout(function() {
+							chat.blur();
+						}, 100);
+					} else if(message.length <= 512) {
+						chat.send(message);
+						$(this).val("");
+						setTimeout(function() {
+							chat.blur();
+						}, 100);
+					}
 				}
 				evt.preventDefault();
 				evt.stopPropagation();
@@ -2669,7 +2516,7 @@ Rect.prototype.contains = function(x, y) {
 
 			scrollToBottom: function() {
 				var ele = $("#chat ul").get(0);
-				ele.scrollTop = ele.scrollHeight;
+				ele.scrollTop = ele.scrollHeight - ele.clientHeight;
 			},
 
 			blur: function() {
@@ -2747,8 +2594,14 @@ Rect.prototype.contains = function(x, y) {
 	}
 	MIDI_KEY_NAMES.push("c7");
 
+	var devices_json = "[]";
+	function sendDevices() {
+		gClient.sendArray([{"m": "devices", "list": JSON.parse(devices_json)}]);
+	}
+	gClient.on("connect", sendDevices);
+
 	(function() {
-		gClient.velVolume = 1;
+
 		if (navigator.requestMIDIAccess) {
 			navigator.requestMIDIAccess().then(
 				function(midi) {
@@ -2766,24 +2619,57 @@ Rect.prototype.contains = function(x, y) {
 							release(MIDI_KEY_NAMES[note_number - 9 + MIDI_TRANSPOSE]);
 						} else if(cmd == 9) {
 							// NOTE_ON
-							if (channel != 9) {
-								press(MIDI_KEY_NAMES[note_number - 9 + MIDI_TRANSPOSE], Math.min(vel / 100 * gClient.velVolume, 1));
-							}
+							if(evt.target.volume !== undefined)
+								vel *= evt.target.volume;
+							press(MIDI_KEY_NAMES[note_number - 9 + MIDI_TRANSPOSE], vel / 100);
 						} else if(cmd == 11) {
 							// CONTROL_CHANGE
-							if(note_number == 64) {
-								if(vel >= 64) {
-									pressSustain();
-								} else {
-									releaseSustain();
+							if(!gAutoSustain) {
+								if(note_number == 64) {
+									if(vel > 0) {
+										pressSustain();
+									} else {
+										releaseSustain();
+									}
 								}
-							} else if (note_number == 7) {
-								volume_slider.set(vel / 127);
-								gPiano.audio.setVolume(vel / 127);
-								if(window.localStorage) localStorage.volume = vel / 127;
-							} else if (note_number == 3) {
-								gClient.velVolume = vel / 127 * 2;
 							}
+						}
+					}
+
+					function deviceInfo(dev) {
+						return {
+							type: dev.type,
+							//id: dev.id,
+							manufacturer: dev.manufacturer,
+							name: dev.name,
+							version: dev.version,
+							//connection: dev.connection,
+							//state: dev.state,
+							enabled: dev.enabled,
+							volume: dev.volume
+						};
+					}
+
+					function updateDevices() {
+						var list = [];
+						if(midi.inputs.size > 0) {
+							var inputs = midi.inputs.values();
+							for(var input_it = inputs.next(); input_it && !input_it.done; input_it = inputs.next()) {
+								var input = input_it.value;
+								list.push(deviceInfo(input));
+							}
+						}
+						if(midi.outputs.size > 0) {
+							var outputs = midi.outputs.values();
+							for(var output_it = outputs.next(); output_it && !output_it.done; output_it = outputs.next()) {
+								var output = output_it.value;
+								list.push(deviceInfo(output));
+							}
+						}
+						var new_json = JSON.stringify(list);
+						if(new_json !== devices_json) {
+							devices_json = new_json;
+							sendDevices();
 						}
 					}
 
@@ -2798,6 +2684,9 @@ Rect.prototype.contains = function(x, y) {
 								if(input.enabled !== false) {
 									input.enabled = true;
 								}
+								if(typeof input.volume === "undefined") {
+									input.volume = 1.0;
+								}
 								console.log("input", input);
 							}
 						}
@@ -2806,6 +2695,9 @@ Rect.prototype.contains = function(x, y) {
 							for(var output_it = outputs.next(); output_it && !output_it.done; output_it = outputs.next()) {
 								var output = output_it.value;
 								//output.enabled = false; // edit: don't touch
+								if(typeof output.volume === "undefined") {
+									output.volume = 1.0;
+								}
 								console.log("output", output);
 							}
 							gMidiOutTest = function(note_name, vel, delay_ms) {
@@ -2817,12 +2709,16 @@ Rect.prototype.contains = function(x, y) {
 								for(var output_it = outputs.next(); output_it && !output_it.done; output_it = outputs.next()) {
 									var output = output_it.value;
 									if(output.enabled) {
-										output.send([0x90, note_number, vel], window.performance.now() + delay_ms);
+										var v = vel;
+										if(output.volume !== undefined)
+											v *= output.volume;
+										output.send([0x90, note_number, v], window.performance.now() + delay_ms);
 									}
 								}
 							}
 						}
 						showConnections(false);
+						updateDevices();
 					}
 
 					midi.addEventListener("statechange", function(evt) {
@@ -2857,10 +2753,24 @@ Rect.prototype.contains = function(x, y) {
 											input.enabled = !input.enabled;
 											evt.target.classList.toggle("enabled");
 											console.log("click", input);
+											updateDevices();
 											return;
 										}
 									}
 								});
+								if(gMidiVolumeTest) {
+									var knob = document.createElement("canvas");
+									mixin(knob, {width: 16 * window.devicePixelRatio, height: 16 * window.devicePixelRatio, className: "knob"});
+									li.appendChild(knob);
+									knob = new Knob(knob, 0, 2, 0.01, input.volume, "volume");
+									knob.canvas.style.width = "16px";
+									knob.canvas.style.height = "16px";
+									knob.canvas.style.float = "right";
+									knob.on("change", function(k) {
+										input.volume = k.value;
+									});
+									knob.emit("change", knob);
+								}
 								inputs_ul.appendChild(li);
 							}
 						} else {
@@ -2884,10 +2794,24 @@ Rect.prototype.contains = function(x, y) {
 											output.enabled = !output.enabled;
 											evt.target.classList.toggle("enabled");
 											console.log("click", output);
+											updateDevices();
 											return;
 										}
 									}
 								});
+								if(gMidiVolumeTest) {
+									var knob = document.createElement("canvas");
+									mixin(knob, {width: 16 * window.devicePixelRatio, height: 16 * window.devicePixelRatio, className: "knob"});
+									li.appendChild(knob);
+									knob = new Knob(knob, 0, 2, 0.01, output.volume, "volume");
+									knob.canvas.style.width = "16px";
+									knob.canvas.style.height = "16px";
+									knob.canvas.style.float = "right";
+									knob.on("change", function(k) {
+										output.volume = k.value;
+									});
+									knob.emit("change", knob);
+								}
 								outputs_ul.appendChild(li);
 							}
 						} else {
@@ -2919,18 +2843,102 @@ Rect.prototype.contains = function(x, y) {
 		}
 	})();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// bug supply
+
+////////////////////////////////////////////////////////////////
+	
+	window.onerror = function(message, url, line) {
+		var url = url || "(no url)";
+		var line = line || "(no line)";
+		// errors in socket.io
+		if(url.indexOf("socket.io.js") !== -1) {
+			if(message.indexOf("INVALID_STATE_ERR") !== -1) return;
+			if(message.indexOf("InvalidStateError") !== -1) return;
+			if(message.indexOf("DOM Exception 11") !== -1) return;
+			if(message.indexOf("Property 'open' of object #<c> is not a function") !== -1) return;
+			if(message.indexOf("Cannot call method 'close' of undefined") !== -1) return;
+			if(message.indexOf("Cannot call method 'close' of null") !== -1) return;
+			if(message.indexOf("Cannot call method 'onClose' of null") !== -1) return;
+			if(message.indexOf("Cannot call method 'payload' of null") !== -1) return;
+			if(message.indexOf("Unable to get value of the property 'close'") !== -1) return;
+			if(message.indexOf("NS_ERROR_NOT_CONNECTED") !== -1) return;
+			if(message.indexOf("Unable to get property 'close' of undefined or null reference") !== -1) return;
+			if(message.indexOf("Unable to get value of the property 'close': object is null or undefined") !== -1) return;
+			if(message.indexOf("this.transport is null") !== -1) return;
+		}
+		// errors in soundmanager2
+		if(url.indexOf("soundmanager2.js") !== -1) {
+			// operation disabled in safe mode?
+			if(message.indexOf("Could not complete the operation due to error c00d36ef") !== -1) return;
+			if(message.indexOf("_s.o._setVolume is not a function") !== -1) return;
+		}
+		// errors in midibridge
+		if(url.indexOf("midibridge") !== -1) {
+			if(message.indexOf("Error calling method on NPObject") !== -1) return;
+		}
+		// too many failing extensions injected in my html
+		if(url.indexOf(".js") !== url.length - 3) return;
+		// extensions inject cross-domain embeds too
+		if(url.toLowerCase().indexOf("multiplayerpiano.com") == -1) return;
+
+		// errors in my code
+		if(url.indexOf("script.js") !== -1) {
+			if(message.indexOf("Object [object Object] has no method 'on'") !== -1) return;
+			if(message.indexOf("Object [object Object] has no method 'off'") !== -1) return;
+			if(message.indexOf("Property '$' of object [object Object] is not a function") !== -1) return;
+		}
+
+		var enc = "/bugreport/"
+			+ (message ? encodeURIComponent(message) : "") + "/"
+			+ (url ? encodeURIComponent(url) : "") + "/"
+			+ (line ? encodeURIComponent(line) : "");
+		var img = new Image();
+		img.src = enc;
+	};
+
+
+
+
+
+
+
+
+
 	// API
 	window.MPP = {
-		get press() { return press },
-		set press(func) { press = func },
-		get release() { return release },
-		set release(func) { release = func },
+		press: press,
+		release: release,
+		pressSustain: pressSustain,
+		releaseSustain: releaseSustain,
 		piano: gPiano,
 		client: gClient,
 		chat: chat,
 		noteQuota: gNoteQuota,
-		soundSelector: gSoundSelector
+		soundSelector: gSoundSelector,
+		Notification: Notification
 	};
+
+
+
+
+
+
+
+
+
 
 	// record mp3
 	(function() {
@@ -3074,7 +3082,7 @@ Rect.prototype.contains = function(x, y) {
 
 			// mix
 			var knob = document.createElement("canvas");
-			mixin(knob, {width: 32 * devicePixelRatio, height: 32 * devicePixelRatio, className: "knob"});
+			mixin(knob, {width: 32 * window.devicePixelRatio, height: 32 * window.devicePixelRatio, className: "knob"});
 			html.appendChild(knob);
 			knob = new Knob(knob, 0, 100, 0.1, 50, "mix", "%");
 			knob.canvas.style.width = "32px";
@@ -3101,7 +3109,7 @@ Rect.prototype.contains = function(x, y) {
 
 			// osc1 attack
 			var knob = document.createElement("canvas");
-			mixin(knob, {width: 32 * devicePixelRatio, height: 32 * devicePixelRatio, className: "knob"});
+			mixin(knob, {width: 32 * window.devicePixelRatio, height: 32 * window.devicePixelRatio, className: "knob"});
 			html.appendChild(knob);
 			knob = new Knob(knob, 0, 1, 0.001, osc1_attack, "osc1 attack", "s");
 			knob.canvas.style.width = "32px";
@@ -3113,7 +3121,7 @@ Rect.prototype.contains = function(x, y) {
 
 			// osc1 decay
 			var knob = document.createElement("canvas");
-			mixin(knob, {width: 32 * devicePixelRatio, height: 32 * devicePixelRatio, className: "knob"});
+			mixin(knob, {width: 32 * window.devicePixelRatio, height: 32 * window.devicePixelRatio, className: "knob"});
 			html.appendChild(knob);
 			knob = new Knob(knob, 0, 2, 0.001, osc1_decay, "osc1 decay", "s");
 			knob.canvas.style.width = "32px";
@@ -3124,7 +3132,7 @@ Rect.prototype.contains = function(x, y) {
 			knob.emit("change", knob);
 
 			var knob = document.createElement("canvas");
-			mixin(knob, {width: 32 * devicePixelRatio, height: 32 * devicePixelRatio, className: "knob"});
+			mixin(knob, {width: 32 * window.devicePixelRatio, height: 32 * window.devicePixelRatio, className: "knob"});
 			html.appendChild(knob);
 			knob = new Knob(knob, 0, 1, 0.001, osc1_sustain, "osc1 sustain", "x");
 			knob.canvas.style.width = "32px";
@@ -3136,7 +3144,7 @@ Rect.prototype.contains = function(x, y) {
 
 			// osc1 release
 			var knob = document.createElement("canvas");
-			mixin(knob, {width: 32 * devicePixelRatio, height: 32 * devicePixelRatio, className: "knob"});
+			mixin(knob, {width: 32 * window.devicePixelRatio, height: 32 * window.devicePixelRatio, className: "knob"});
 			html.appendChild(knob);
 			knob = new Knob(knob, 0, 2, 0.001, osc1_release, "osc1 release", "s");
 			knob.canvas.style.width = "32px";
@@ -3163,12 +3171,102 @@ Rect.prototype.contains = function(x, y) {
 			});
 		}
 	})();
+
+
+
+
 	
-	var onClick = function(evt) {
-		document.removeEventListener("click", onClick);
-		MPP.piano.audio.context.resume();
-	}
-	document.addEventListener("click", onClick);
+
+
+
+
+
+
+
 	
+
+
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// misc
+
+////////////////////////////////////////////////////////////////
+
+// analytics	
+window.google_analytics_uacct = "UA-882009-7";
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-882009-7']);
+_gaq.push(['_trackPageview']);
+_gaq.push(['_setAllowAnchor', true]);
+(function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+// twitter
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;
+	js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+// fb
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+// non-ad-free experience
+/*(function() {
+	function adsOn() {
+		if(window.localStorage) {
+			var div = document.querySelector("#inclinations");
+			div.innerHTML = "Ads:<br>ON / <a id=\"adsoff\" href=\"#\">OFF</a>";
+			div.querySelector("#adsoff").addEventListener("click", adsOff);
+			localStorage.ads = true;
+		}
+		// adsterra
+		var script = document.createElement("script");
+		script.src = "//pl132070.puhtml.com/68/7a/97/687a978dd26d579c788cb41e352f5a41.js";
+		document.head.appendChild(script);
+	}
+
+	function adsOff() {
+		if(window.localStorage) localStorage.ads = false;
+		document.location.reload(true);
+	}
+
+	function noAds() {
+		var div = document.querySelector("#inclinations");
+		div.innerHTML = "Ads:<br><a id=\"adson\" href=\"#\">ON</a> / OFF";
+		div.querySelector("#adson").addEventListener("click", adsOn);
+	}
+
+	if(window.localStorage) {
+		if(localStorage.ads === undefined || localStorage.ads === "true")
+			adsOn();
+		else
+			noAds();
+	} else {
+		adsOn();
+	}
+})();*/
