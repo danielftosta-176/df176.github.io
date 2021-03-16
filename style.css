@@ -3,6 +3,7 @@ background: #FFFFFF;
 background: -moz-linear-gradient(-45deg, #FFFFFF 0%, #A4A4A4 50%, #363636 100%);
 background: -webkit-linear-gradient(-45deg, #FFFFFF 0%, #A4A4A4 50%, #363636 100%);
 background: linear-gradient(135deg, #FFFFFF 0%, #A4A4A4 50%, #363636 100%);
+border: 10px outset #1C6EA4;
 }
 
 h1 {
@@ -16,4 +17,6 @@ a {
     color: #FFFFFF;
     text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
     font-family: Sans-serif, Arial;
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 31px;
 }
