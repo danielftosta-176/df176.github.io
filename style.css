@@ -1,5 +1,9 @@
 body {
-background: #D0E4F5 url("bg.png") no-repeat scroll 0 0;
+background-color: #D0E4F5;
+background-image: url("bg.png");
+background-repeat: no-repeat;
+background-attachment: scroll;
+background-position: 0% 0%;
 }
 
 h1 {
