@@ -1267,7 +1267,7 @@ Rect.prototype.contains = function(x, y) {
 		"/sounds/Steinway_Grand/",
 		"/sounds/Emotional/",
 		"/sounds/Untitled/"*/
-		"https://danielftosta-176.github.io/df176.github.io/MPP/mp3/",
+		"/mp3/",
 		"https://ledlamp.github.io/piano-sounds/Emotional/",
 		"https://ledlamp.github.io/piano-sounds/Emotional_2.0/",
 		"https://ledlamp.github.io/piano-sounds/GreatAndSoftPiano/",
