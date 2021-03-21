@@ -1261,7 +1261,7 @@ Rect.prototype.contains = function(x, y) {
 	var gSoundSelector = new SoundSelector(gPiano);
 	gSoundSelector.addPacks([
 	/*	"/sounds/Emotional_2.0/",
-		"/sounds/Harp/",
+		"/mp3/",
 		"/sounds/Music_Box/",
 		"/sounds/Vintage_Upright/",
 		"/sounds/Steinway_Grand/",
