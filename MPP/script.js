@@ -1267,7 +1267,6 @@ Rect.prototype.contains = function(x, y) {
 		"/sounds/Steinway_Grand/",
 		"/sounds/Emotional/",
 		"/sounds/Untitled/"*/
-		"/mp3/",
 		"https://ledlamp.github.io/piano-sounds/Emotional/",
 		"https://ledlamp.github.io/piano-sounds/Emotional_2.0/",
 		"https://ledlamp.github.io/piano-sounds/GreatAndSoftPiano/",
@@ -1356,7 +1355,7 @@ Rect.prototype.contains = function(x, y) {
 ////////////////////////////////////////////////////////////////
 
 	var channel_id = decodeURIComponent(window.location.hash.substr(1)) || "lobby";
-	var gClient = new Client("wss://app.multiplayerpiano.com:443");
+	var gClient = new Client("wss://mpp.hri7566.info:8443");
 	gClient.setChannel(channel_id);
 	gClient.start();
 
