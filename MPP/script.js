@@ -1260,6 +1260,13 @@ Rect.prototype.contains = function(x, y) {
 	
 	var gSoundSelector = new SoundSelector(gPiano);
 	gSoundSelector.addPacks([
+	/*	"/sounds/Emotional_2.0/",
+		"/sounds/Harp/",
+		"/sounds/Music_Box/",
+		"/sounds/Vintage_Upright/",
+		"/sounds/Steinway_Grand/",
+		"/sounds/Emotional/",
+		"/sounds/Untitled/"*/
 		"/mp3/",
 		"https://ledlamp.github.io/piano-sounds/Emotional/",
 		"https://ledlamp.github.io/piano-sounds/Emotional_2.0/",
